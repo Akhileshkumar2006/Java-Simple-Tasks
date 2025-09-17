@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Task1 {
+    public static void main(String[] args) {
+        ArrayList<String> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        while (true) {
+            System.out.println("----------TASKS-------------");
+            System.out.println("Please enter your Task number");
+            System.out.println("1. To Enter the Task");
+            System.out.println("2. To Delete the Task");
+            System.out.println("3. To See the Task List");
+            System.out.println("4. To Exit from the Task");
+            if (sc.hasNextInt()) {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } else {
+                System.out.println("Invalid input. Please enter a number!");
+                sc.nextLine(); 
+                continue;      
+            }
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the Task Description");
+                    String task = sc.nextLine();
+                    tasks.add(task);
+                    System.out.println("Task added Successfully");
+                    break;
+
+                case 2:
+                    if (tasks.isEmpty()) {
+                        System.out.println("The tasks are empty");
+                    } else {
+                        System.out.println("Your Tasks:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ": " + tasks.get(i));
+                        }
+                        System.out.println("Enter the number to remove the task");
+
+                        if (sc.hasNextInt()) {
+                            int tasknum = sc.nextInt();
+                            sc.nextLine();
+                            if (tasknum >= 1 && tasknum <= tasks.size()) {
+                                tasks.remove(tasknum - 1);
+                                System.out.println("Task removed successfully");
+                            } else {
+                                System.out.println("Entered Invalid Number");
+                            }
+                        } else {
+                            System.out.println("Invalid input. Please enter a number!");
+                            sc.nextLine();
+                        }
+                    }
+                    break;
+
+                case 3:
+                    if (tasks.isEmpty()) {
+                        System.out.println("No Tasks are available");
+                    } else {
+                        System.out.println("Task List:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ": " + tasks.get(i));
+                        }
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting from the Tasks");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
